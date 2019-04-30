@@ -1,0 +1,67 @@
+<html>
+
+<head></head>
+
+<body>
+
+    <button onclick="openWindowWithSameOrigin()">Open Window With Same Origin</button>
+    <button onclick="openWindowWithDiffOrigin()">Open Window With Same Origin</button>
+    <button onclick="createIframeWithSameOrigin()">Open Window With Same Origin</button>
+    <button onclick="createIframeWithDiffOrigin()">Open Window With Same Origin</button>
+    
+    <script>
+        var openWindowWithSameOrigin = function () {
+            win = window.open("http://127.0.0.1:8777/index.1.html", "_blank", "toolbar=yes,scrollbars=yes,resizable=yes,top=100,left=500,width=400,height=400");
+
+            win.onload = function () {
+                console.log('Stealing password')
+                win.document.querySelector('input[name="password"]').addEventListener('keyup', function (e) {
+                    console.log(win.document.querySelector('input[name="password"]').value);
+                })
+            }
+        }
+
+        var openWindowWithDiffOrigin = function () {
+            win = window.open("http://127.0.0.1:8778/index.1.html", "_blank", "toolbar=yes,scrollbars=yes,resizable=yes,top=100,left=500,width=400,height=400");
+
+            win.onload = function () {
+                console.log('Stealing password');
+                win.document.querySelector('input[name="password"]').addEventListener('keyup', function (e) {
+                    console.log('Stolen pwd: ' + win.document.querySelector('input[name="password"]').value);
+                })
+            }
+        }
+
+        var createIframeWithSameOrigin = function () {
+            var iframe = document.createElement('iframe');
+            iframe.width = 500;
+            iframe.height = 500;
+            iframe.src = 'http://127.0.0.1:8777/index.1.html';
+            document.body.appendChild(iframe);
+
+            iframe.onload = function () {
+                console.log('Stealing password');
+                iframe.contentWindow.document.querySelector('input[name="password"]').addEventListener('keyup', function (e) {
+                    console.log('Stolen pwd: ' + iframe.contentWindow.document.querySelector('input[name="password"]').value);
+                })
+            }
+        }
+
+        var createIframeWithDiffOrigin = function () {
+            var iframe = document.createElement('iframe');
+            iframe.width = 500;
+            iframe.height = 500;
+            iframe.src = 'http://127.0.0.1:8778/index.1.html';
+            document.body.appendChild(iframe);
+
+            iframe.onload = function () {
+                console.log('Stealing password');
+                iframe.contentWindow.document.querySelector('input[name="password"]').addEventListener('keyup', function (e) {
+                    console.log('Stolen pwd: ' + iframe.contentWindow.document.querySelector('input[name="password"]').value);
+                })
+            }
+        }
+    </script>
+</body>
+
+</html>
