@@ -1,0 +1,1 @@
+receiver({info: 'something comes from server'});

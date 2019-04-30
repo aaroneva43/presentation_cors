@@ -4,11 +4,12 @@
 
 <body>
 
-    <button onclick="openWindowWithSameOrigin()">Open Window With Same Origin</button>
-    <button onclick="openWindowWithDiffOrigin()">Open Window With Same Origin</button>
-    <button onclick="createIframeWithSameOrigin()">Open Window With Same Origin</button>
-    <button onclick="createIframeWithDiffOrigin()">Open Window With Same Origin</button>
-    
+    <button onclick="openWindowWithSameOrigin()">Open Window With Same Origins</button>
+    <button onclick="openWindowWithDiffOrigin()">Open Window With Different Origins</button>
+    <button onclick="createIframeWithSameOrigin()">Open Iframe With Same Origins</button>
+    <button onclick="createIframeWithDiffOrigin()">Open Iframe With Different Origins</button>
+    <button onclick="jsonp()">Test JsonP</button>
+
     <script>
         var openWindowWithSameOrigin = function () {
             win = window.open("http://127.0.0.1:8777/index.1.html", "_blank", "toolbar=yes,scrollbars=yes,resizable=yes,top=100,left=500,width=400,height=400");
@@ -60,6 +61,16 @@
                     console.log('Stolen pwd: ' + iframe.contentWindow.document.querySelector('input[name="password"]').value);
                 })
             }
+        }
+
+        var jsonp = function () {
+
+            receiver = function (json) { console.log(json) };
+
+            var script = document.createElement('script');
+            script.src = 'http://127.0.0.1:8778/jsonp.js'
+
+            document.head.append(script);
         }
     </script>
 </body>
