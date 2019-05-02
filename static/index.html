@@ -1,6 +1,8 @@
 <html>
 
-<head></head>
+<head>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.js"></script>
+</head>
 
 <body>
 
@@ -102,6 +104,14 @@
 
 
         }
+
+        window.addEventListener("message", function (event) {
+            debugger
+            console.log(event.data);
+
+        }, false);
+
+
     </script>
 </body>
 

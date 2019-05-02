@@ -4,8 +4,15 @@
 
 <body>
 
-    <input name="password" type="password">
-    
+    <input name="password" type="password" onkeyup="pmsg()">
+
+
+    <script>
+        function pmsg() {
+            // window.opener.postMessage(document.querySelector('input').value,
+            //     "http://127.0.0.1:8777");
+        }
+    </script>
 </body>
 
 </html>
