@@ -10,7 +10,7 @@ const port3 = 8779;
 app.use('/', express.static(path.join(__dirname, 'static'), {
     setHeaders: function (res, path) {
         // if (res.socket.server._connectionKey.indexOf('8779')) {
-        //     res.set("Access-Control-Allow-Origin", "*");
+        //     res.set("Access-Control-Allow-Origin", "https://www.xxx.com");
         //     res.set("Access-Control-Allow-Headers", "Content-Type,X-Requested-With");
         //     res.set("Access-Control-Allow-Methods", "PUT,POST,GET,DELETE,OPTIONS");
         //     res.set("X-Powered-By", ' 3.2.1')
@@ -22,8 +22,32 @@ app.use('/', express.static(path.join(__dirname, 'static'), {
 }));
 
 app.get('/rest/test', function (req, res) {
-    // res.set("Access-Control-Allow-Origin", "*");
+    console.log(req);
+    res.set("Access-Control-Allow-Origin", "https://www.google.com");
     res.send('this is a rest api response');
+});
+
+app.post('/rest/test', function (req, res) {
+    res.set("Access-Control-Allow-Origin", "https://www.google.com");
+    res.send('this is a rest api response -- POST');
+});
+
+app.put('/rest/test', function (req, res) {
+    res.set("Access-Control-Allow-Origin", "https://www.google.com");
+    
+    if (req.method === 'OPTIONS') {
+        res.send(200);
+    }
+    res.send('this is a rest api response -- PUT');
+
+});
+
+app.options('/rest/test', function (req, res) {
+    res.set("Access-Control-Allow-Origin", "https://www.google.com");
+    res.set('Access-Control-Allow-Methods', 'PUT');
+
+    res.send(200);
+
 });
 
 app.listen(port1, () => console.log(`Example app listening on port ${port1}!`));
